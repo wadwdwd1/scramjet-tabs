@@ -1,11 +1,38 @@
 {
-  "name": "your-project",
-  "version": "1.0.0",
-  "start": "node src/index.js"
-  },
+  "name": "scramjet-demo",
+  "version": "2.0.0",
+  "start": "node src/index.js",
   "dependencies": {
-    "express": "^4.18.2",
-    "cors": "^2.8.5",
-    "some-other-package": "^x.x.x"
+    "@fastify/static": "^8.2.0",
+    "@mercuryworkshop/bare-mux": "^2.1.7",
+    "@mercuryworkshop/epoxy-transport": "^2.1.28",
+    "@mercuryworkshop/scramjet": "https://github.com/MercuryWorkshop/scramjet/releases/download/latest/mercuryworkshop-scramjet-2.0.0-alpha.tgz",
+    "@mercuryworkshop/wisp-js": "^0.3.3",
+    "fastify": "^5.4.0",
+    "ws": "^8.18.3"
+  },
+  "devDependencies": {
+    "eslint": "^9.13.0",
+    "prettier": "^3.3.3"
+  },
+  "vercel": {
+    "version": 3,
+    "builds": [
+      {
+        "src": "src/index.js",
+        "use": "@vercel/node",
+        "config": {
+          "includeFiles": [
+            "**/*.tgz"
+          ]
+        }
+      }
+    ],
+    "routes": [
+      {
+        "src": "/(.*)",
+        "dest": "src/index.js"
+      }
+    ]
   }
 }
